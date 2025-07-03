@@ -3,9 +3,6 @@ function buildGrid() {
     grid.innerHTML = "";
     const colCount = Math.floor(window.innerWidth / 94);
     const rowCount = Math.floor(window.innerHeight / 154);
-    console.log("counts");
-    console.log(colCount);
-    console.log(rowCount);
 
     for (let row = 0; row < rowCount + 1; row++) {
         for (let col = 0; col < colCount; col++) {
@@ -34,8 +31,6 @@ function buildGrid() {
 document.addEventListener("DOMContentLoaded", () => {
     buildGrid();
 });
-
-let resizeTimeout;
 
 window.addEventListener("resize", () => {
     const grid = document.querySelector(".background-grid");
