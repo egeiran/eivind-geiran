@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Om meg</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+
+<div class="background-grid" aria-hidden="true"></div>
+
+<body>
+    <header>
+        <div class="container">
+            <h1>Hei, jeg heter <span th:text="${name}">[Navn]</span> 👋</h1>
+            <p th:text="${description}">[Beskrivelse]</p>
+        </div>
+    </header>
+    <main>
+
+        <div class="carousel-wrapper">
+            <button class="nav-button" onclick="prevImage()">⬅</button>
+
+            <div class="carousel-container">
+                <div class="carousel" id="carousel">
+                    <th:block th:each="i : ${#numbers.sequence(1, numImages)}">
+                        <img th:src="@{/EivindsVakreØyeblikk/IMG__${i}__.webp}" class="carousel-img"
+                            onclick="pauseCarousel()" alt="Bilde nr. [[${i}]]">
+                    </th:block>
+                </div>
+            </div>
+
+            <button class="nav-button" onclick="nextImage()">➡</button>
+        </div>
+
+        <div id="indicators" class="indicator-container"></div>
+
+        <div class="container" id="erfaringer">
+            <h1>Mine erfaringer</h1>
+
+            <div class="filter-buttons">
+                <button id="selected" onclick="filterExperiences('Alle'), setSelected(this)">Alle</button>
+                <button onclick="filterExperiences('Betalt'), setSelected(this)">💼 Betalt</button>
+                <button onclick="filterExperiences('Frivillig'), setSelected(this)">❤️ Frivillig</button>
+                <button onclick="filterExperiences('Utdanning'), setSelected(this)">🎓 Utdanning</button>
+            </div>
+
+            <div id="experience-container">
+                <div th:each="exp : ${allExperiences}" class="experience-card" th:attr="data-type=${exp.type}">
+                    <div class="experience-left">
+                        <img th:src="@{${exp.imagePath}}" alt="Bilde for [[${exp.title}]]">
+                        <div class="experience-type" th:switch="${exp.type}">
+                            <span th:case="'Betalt'">💼 Betalt</span>
+                            <span th:case="'Frivillig'">❤️ Frivillig</span>
+                            <span th:case="'Utdanning'">🎓 Utdanning</span>
+                            <span th:case="*">📦 Annet</span>
+                        </div>
+                    </div>
+                    <div class="experience-content">
+                        <h3 th:text="${exp.title}">Tittel</h3>
+                        <h4 th:text="${exp.organization}">Organisasjon</h4>
+                        <p th:text="${exp.period}">Periode</p>
+                        <p th:text="${exp.description}">Beskrivelse</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section id="spotify-section">
+            <h2>Sanger jeg ikke får nok av den siste tiden</h2>
+            <div id="tracks" class="spotify-grid"></div>
+
+            <h2>Artisten jeg har hørt mest på siste halvåret</h2>
+            <div id="artists"></div>
+        </section>
+    </main>
+
+    <footer>
+        <div>
+            <div></div>
+            <div id></div>
+            <div id="some"></div>
+        </div>
+    </footer>
+
+    <script src="/js/carousel.js"></script>
+    <script src="/js/experience.js"></script>
+    <script src="/js/spotify.js"></script>
+    <script src="/js/background.js"></script>
+
+</body>
+
+</html>
