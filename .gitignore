@@ -1,3 +1,5 @@
 /target
 /HELP.md
-/src/testsrc/main/resources/application.properties
+/src/main/resources/application.properties
+/src/main/test
+src/main/resources/application.properties
